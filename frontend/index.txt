@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EduTrack Pro — Smart Attendance System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════ LOGIN SCREEN ═══════════════════ -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-bg">
+    <div class="lb-circle c1"></div>
+    <div class="lb-circle c2"></div>
+    <div class="lb-circle c3"></div>
+    <div class="lb-grid"></div>
+  </div>
+
+  <div class="login-wrap">
+    <!-- Brand -->
+    <div class="login-brand">
+      <div class="brand-mark"><i class="fa fa-graduation-cap"></i></div>
+      <div>
+        <h1 class="brand-name">EduTrack <span>Pro</span></h1>
+        <p class="brand-tag">Smart Attendance & Analytics Platform</p>
+      </div>
+    </div>
+
+    <!-- Login Card -->
+    <div class="login-card">
+      <!-- Portal Tabs -->
+      <div class="portal-tabs">
+        <button class="ptab active" data-portal="admin" onclick="switchPortal(this,'admin')">
+          <i class="fa fa-shield-halved"></i> Admin Portal
+        </button>
+        <button class="ptab" data-portal="faculty" onclick="switchPortal(this,'faculty')">
+          <i class="fa fa-chalkboard-teacher"></i> Faculty Portal
+        </button>
+      </div>
+
+      <!-- Admin Portal -->
+      <div id="adminPortal" class="portal-panel">
+        <div class="portal-header">
+          <h3>Admin / HOD Sign In</h3>
+          <p>Full system access and management</p>
+        </div>
+        <div class="role-select-row">
+          <button class="role-chip active" data-role="admin" onclick="pickAdminRole(this)">
+            <i class="fa fa-shield-halved"></i> Admin
+          </button>
+          <button class="role-chip" data-role="hod" onclick="pickAdminRole(this)">
+            <i class="fa fa-user-tie"></i> HOD
+          </button>
+          <button class="role-chip" data-role="classincharge" onclick="pickAdminRole(this)">
+            <i class="fa fa-clipboard-user"></i> Class Incharge
+          </button>
+        </div>
+        <div class="login-field">
+          <label>Email</label>
+          <div class="lf-wrap"><i class="fa fa-envelope"></i>
+            <input id="adminEmail" type="email" placeholder="admin@college.edu" value="admin@college.edu"/>
+          </div>
+        </div>
+        <div class="login-field">
+          <label>Password</label>
+          <div class="lf-wrap"><i class="fa fa-lock"></i>
+            <input id="adminPass" type="password" placeholder="••••••••" value="admin2025"/>
+          </div>
+        </div>
+        <button class="btn-signin" onclick="loginAdmin()">
+          <i class="fa fa-right-to-bracket"></i> Sign In
+        </button>
+        <p class="login-hint"><i class="fa fa-info-circle"></i> Use any role above for demo</p>
+      </div>
+
+      <!-- Faculty Portal -->
+      <div id="facultyPortal" class="portal-panel dn">
+        <div class="portal-header">
+          <h3>Faculty Sign In</h3>
+          <p>Access your classes, timetable & attendance</p>
+        </div>
+        <div class="login-field">
+          <label>Faculty ID</label>
+          <div class="lf-wrap"><i class="fa fa-id-card"></i>
+            <input id="facIdInput" type="text" placeholder="e.g. FAC001" value="FAC001"/>
+          </div>
+        </div>
+        <div class="login-field">
+          <label>Password</label>
+          <div class="lf-wrap"><i class="fa fa-lock"></i>
+            <input id="facPassInput" type="password" placeholder="••••••••" value="fac@2025"/>
+          </div>
+        </div>
+        <!-- Quick faculty selector for demo -->
+        <div class="login-field">
+          <label>Quick Demo Select</label>
+          <div class="lf-wrap"><i class="fa fa-user"></i>
+            <select id="facDemoSelect" onchange="fillFacDemo()" style="flex:1;background:none;border:none;font-size:.9rem">
+              <option value="">-- Select Faculty --</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-signin" onclick="loginFaculty()">
+          <i class="fa fa-right-to-bracket"></i> Faculty Sign In
+        </button>
+        <p class="login-hint"><i class="fa fa-info-circle"></i> Each faculty sees only their subjects & classes</p>
+      </div>
+    </div>
+
+    <p class="login-footer-note">© 2025 EduTrack Pro · Smart Attendance & Performance Analytics</p>
+  </div>
+</div>
+
+<!-- ═══════════════════ APP SHELL ═══════════════════ -->
+<div id="appShell" class="app-shell dn">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">
+      <div class="sb-brand">
+        <div class="sb-icon"><i class="fa fa-graduation-cap"></i></div>
+        <div class="sb-title-wrap">
+          <span class="sb-title">EduTrack <b>Pro</b></span>
+          <span class="sb-version">Smart Attendance</span>
+        </div>
+      </div>
+      <button class="sb-hamburger" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
+    </div>
+
+    <!-- User card in sidebar -->
+    <div class="sb-user-card" id="sbUserCard">
+      <div class="suc-av" id="sucAv">AD</div>
+      <div class="suc-info">
+        <div class="suc-name" id="sucName">Administrator</div>
+        <div class="suc-role" id="sucRole">System Admin</div>
+        <div class="suc-dept" id="sucDept">All Departments</div>
+      </div>
+    </div>
+
+    <nav class="sb-nav" id="sbNav"><!-- built by JS --></nav>
+
+    <div class="sb-bottom">
+      <div class="sb-status">
+        <span class="status-dot"></span>
+        <span>System Active</span>
+      </div>
+      <button class="sb-logout-btn" onclick="doLogout()">
+        <i class="fa fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="app-main" id="appMain">
+
+    <!-- TOP BAR -->
+    <header class="topbar" id="topbar">
+      <div class="tb-l">
+        <button class="mob-ham" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
+        <div class="tb-page-title" id="tbPageTitle">Dashboard</div>
+      </div>
+      <div class="tb-r">
+        <div class="tb-clock" id="tbClock"></div>
+        <button class="tb-icon-btn notif-btn" onclick="showPage('alerts')">
+          <i class="fa fa-bell"></i>
+          <span class="notif-badge" id="notifBadge">0</span>
+        </button>
+        <div class="tb-profile" id="tbProfile">
+          <div class="tbp-av" id="tbpAv">AD</div>
+          <div class="tbp-info">
+            <span class="tbp-name" id="tbpName">Admin</span>
+            <span class="tbp-role" id="tbpRole">Administrator</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE AREA -->
+    <div class="page-area" id="pageArea">
+
+      <!-- ╔══════════════════════╗
+           ║  DASHBOARD (role)    ║
+           ╚══════════════════════╝ -->
+      <div id="pg-dashboard" class="page dn">
+        <div id="dashboardContent"><!-- role-based --></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  STUDENT ATTENDANCE  ║
+           ╚══════════════════════╝ -->
+      <div id="pg-attendance" class="page dn">
+        <div class="page-header">
+          <div class="ph-left">
+            <h2>Student Attendance</h2>
+            <p>Face recognition · Live session marking</p>
+          </div>
+          <div class="ph-right" id="attHeaderControls">
+            <select class="sel" id="attDept" onchange="attOnDeptChange()">
+              <option value="">Department</option>
+            </select>
+            <select class="sel" id="attCourse" onchange="attOnCourseChange()">
+              <option value="">Course</option>
+            </select>
+            <select class="sel" id="attSection">
+              <option value="">Section</option>
+            </select>
+          </div>
+        </div>
+        <div class="att-main-grid">
+          <!-- Left: Camera -->
+          <div class="att-cam-col">
+            <div class="cam-viewport" id="camViewport">
+              <div class="cv-idle" id="cvIdle">
+                <div class="cv-idle-icon"><i class="fa fa-camera-slash"></i></div>
+                <h4>Camera Offline</h4>
+                <p>Select Dept → Course → Section → Start</p>
+              </div>
+              <div class="cv-live dn" id="cvLive">
+                <div class="cv-scan-grid"></div>
+                <div class="cv-scanline" id="cvScanline"></div>
+                <div class="cv-faceframe" id="cvFaceFrame">
+                  <div class="ff-corner tl"></div><div class="ff-corner tr"></div>
+                  <div class="ff-corner bl"></div><div class="ff-corner br"></div>
+                  <i class="fa fa-face-smile ff-icon" id="ffIcon"></i>
+                </div>
+                <div class="cv-tag" id="cvTag">Scanning...</div>
+                <div class="cv-live-badge">● LIVE</div>
+              </div>
+            </div>
+            <div class="cam-controls">
+              <button class="btn-start-cam" id="btnStartCam" onclick="startAttendance()">
+                <i class="fa fa-play"></i> Start Session
+              </button>
+              <button class="btn-stop-cam" id="btnStopCam" onclick="stopAttendance()" disabled>
+                <i class="fa fa-stop"></i> Stop
+              </button>
+              <button class="btn-reset-cam" onclick="resetAttSession()">
+                <i class="fa fa-rotate-right"></i>
+              </button>
+            </div>
+            <!-- Detected Student Card -->
+            <div class="detected-card" id="detectedCard">
+              <div class="dc-photo" id="dcPhoto">
+                <i class="fa fa-user"></i>
+              </div>
+              <div class="dc-details">
+                <div class="dc-sname" id="dcSname">Awaiting Detection</div>
+                <div class="dc-smeta" id="dcSmeta">—</div>
+                <div class="dc-status" id="dcStatus"></div>
+              </div>
+              <div class="dc-match">
+                <div class="match-ring" id="matchRing">
+                  <svg width="52" height="52"><circle cx="26" cy="26" r="22" fill="none" stroke="#e8ecf4" stroke-width="4"/><circle id="matchArc" cx="26" cy="26" r="22" fill="none" stroke="#5fceaa" stroke-width="4" stroke-dasharray="138" stroke-dashoffset="138" stroke-linecap="round" transform="rotate(-90 26 26)"/></svg>
+                  <span class="mr-val" id="mrVal">0%</span>
+                </div>
+                <small>Confidence</small>
+              </div>
+            </div>
+          </div>
+          <!-- Right: Log -->
+          <div class="att-log-col">
+            <div class="att-log-card">
+              <div class="alc-head">
+                <div class="alc-title"><i class="fa fa-list-check"></i> Session Log</div>
+                <div class="alc-counts">
+                  <span class="alc-p" id="alcP">0 Present</span>
+                  <span class="alc-a" id="alcA">0 Absent</span>
+                </div>
+              </div>
+              <div class="alc-progress" id="alcProgress">
+                <div class="alc-prog-bar" id="alcProgBar" style="width:0%"></div>
+              </div>
+              <div class="alc-body" id="alcBody">
+                <div class="alc-empty"><i class="fa fa-inbox"></i><p>No entries yet</p></div>
+              </div>
+              <div class="alc-foot">
+                <button class="btn-sm" onclick="exportAttendance()"><i class="fa fa-download"></i> Export CSV</button>
+                <button class="btn-sm accent" onclick="openOverrideFromAtt()"><i class="fa fa-pen-to-square"></i> Override</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  TIMETABLE           ║
+           ╚══════════════════════╝ -->
+      <div id="pg-timetable" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Timetable</h2><p>Weekly schedule by Department → Course → Section</p></div>
+          <div class="ph-right" id="ttHeaderControls">
+            <select class="sel" id="ttDept" onchange="ttOnDeptChange()"><option value="">Department</option></select>
+            <select class="sel" id="ttCourse" onchange="ttOnCourseChange()"><option value="">Course</option></select>
+            <select class="sel" id="ttSection" onchange="renderTimetable()"><option value="">Section</option></select>
+          </div>
+        </div>
+        <div id="ttContent">
+          <div class="empty-msg"><i class="fa fa-calendar-days"></i><p>Select Department, Course and Section to view timetable</p></div>
+        </div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  DEPARTMENTS DRILL   ║
+           ╚══════════════════════╝ -->
+      <div id="pg-departments" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Departments</h2><p>Drill-down: Dept → Course → Section → Students</p></div>
+        </div>
+        <div class="breadcrumb-trail" id="breadTrail"></div>
+        <div id="drillContent"><!-- dynamic --></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  FACULTY MANAGEMENT  ║
+           ╚══════════════════════╝ -->
+      <div id="pg-faculty" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Faculty Management</h2><p>Faculty attendance, profiles & analytics — Admin/HOD only</p></div>
+          <div class="ph-right">
+            <select class="sel" id="facMgmtDept" onchange="renderFacultyPage()">
+              <option value="">All Departments</option>
+            </select>
+            <input type="date" class="sel" id="facMgmtDate" onchange="renderFacultyPage()"/>
+            <button class="btn-primary" onclick="openMarkFacultyModal()"><i class="fa fa-plus"></i> Mark Attendance</button>
+          </div>
+        </div>
+        <!-- KPIs -->
+        <div class="kpi-strip" id="facKpiStrip"></div>
+        <!-- Charts -->
+        <div class="two-col">
+          <div class="card"><div class="card-head"><h4><i class="fa fa-chart-bar"></i> Dept-wise Faculty Attendance</h4></div>
+            <div class="chart-pad"><canvas id="facDeptBarChart" height="180"></canvas></div></div>
+          <div class="card"><div class="card-head"><h4><i class="fa fa-chart-pie"></i> Attendance Status Split</h4></div>
+            <div class="chart-pad"><canvas id="facStatusDonut" height="180"></canvas></div></div>
+        </div>
+        <!-- Faculty Table -->
+        <div class="card">
+          <div class="card-head">
+            <h4><i class="fa fa-users"></i> Faculty Roster</h4>
+            <div class="ch-actions">
+              <div class="search-box"><i class="fa fa-search"></i><input id="facSearch" placeholder="Search name, ID..." oninput="renderFacultyPage()"/></div>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-tbl" id="facTable">
+              <thead><tr><th>Faculty</th><th>ID</th><th>Department</th><th>Subject(s)</th><th>Designation</th><th>Today</th><th>Overall%</th><th>Actions</th></tr></thead>
+              <tbody id="facTbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Faculty-wise Drill: Course/Subject Analysis -->
+        <div class="card">
+          <div class="card-head"><h4><i class="fa fa-chart-line"></i> Faculty Subject-wise Attendance Comparison</h4></div>
+          <div class="chart-pad"><canvas id="facSubjectChart" height="130"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  OVERRIDES           ║
+           ╚══════════════════════╝ -->
+      <div id="pg-overrides" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Attendance Overrides</h2><p>Staff & Incharge corrections with full audit trail</p></div>
+          <div class="ph-right">
+            <button class="btn-primary" onclick="openOverrideModal()"><i class="fa fa-pen-to-square"></i> New Override</button>
+          </div>
+        </div>
+        <!-- Rules -->
+        <div class="rules-info-grid">
+          <div class="rig-card mint">
+            <div class="rig-icon"><i class="fa fa-chalkboard-teacher"></i></div>
+            <div><strong>Staff Override</strong><p>During their scheduled period only. Staff ID + Period + Subject + Reason mandatory.</p></div>
+          </div>
+          <div class="rig-card sky">
+            <div class="rig-icon"><i class="fa fa-clipboard-user"></i></div>
+            <div><strong>Class Incharge</strong><p>Any time for their class. Reason category required (OD-Hackathon, Medical, Sports, etc.)</p></div>
+          </div>
+          <div class="rig-card amber">
+            <div class="rig-icon"><i class="fa fa-shield-halved"></i></div>
+            <div><strong>Admin / HOD</strong><p>Full system override. Faculty attendance edits. Reason mandatory.</p></div>
+          </div>
+        </div>
+        <!-- Log -->
+        <div class="card">
+          <div class="card-head">
+            <h4><i class="fa fa-clock-rotate-left"></i> Override Audit Log</h4>
+            <div class="ch-actions">
+              <select class="sel-sm" id="ovTypeFilter" onchange="renderOverridePage()">
+                <option value="">All Types</option>
+                <option value="staff">Staff</option>
+                <option value="classincharge">Class Incharge</option>
+                <option value="admin">Admin/HOD</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-tbl">
+              <thead><tr><th>Date/Time</th><th>By</th><th>Staff ID</th><th>Student</th><th>Course/Sec</th><th>Period</th><th>From→To</th><th>Reason</th><th>Category</th></tr></thead>
+              <tbody id="ovTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  ANALYTICS           ║
+           ╚══════════════════════╝ -->
+      <div id="pg-analytics" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Analytics</h2><p>Multi-level attendance intelligence</p></div>
+          <div class="ph-right">
+            <select class="sel" id="anlLevel" onchange="onAnlLevelChange()">
+              <option value="overall">🏫 Overall Institution</option>
+              <option value="dept">🏢 Department Level</option>
+              <option value="course">📚 Course Level</option>
+              <option value="section">🏛️ Section Level</option>
+              <option value="faculty">👨‍🏫 Faculty Analytics</option>
+            </select>
+            <select class="sel dn" id="anlDeptSel" onchange="renderAnalytics()"><option value="">Dept</option></select>
+            <select class="sel dn" id="anlCourseSel" onchange="renderAnalytics()"><option value="">Course</option></select>
+          </div>
+        </div>
+        <div id="anlContent"><!-- dynamic --></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  CLASS INCHARGE      ║
+           ╚══════════════════════╝ -->
+      <div id="pg-classincharge" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Class Incharge Panel</h2><p>Full class management — attendance, overrides & alerts</p></div>
+          <div class="ph-right">
+            <select class="sel" id="ciClassSel" onchange="loadCIData()">
+              <option value="">-- Select Class --</option>
+            </select>
+            <button class="btn-primary" onclick="openOverrideModal('classincharge')"><i class="fa fa-pen-to-square"></i> Override</button>
+            <button class="btn-secondary" onclick="bulkSendAlerts()"><i class="fa fa-bell"></i> Alert Low</button>
+          </div>
+        </div>
+        <div id="ciContent"><div class="empty-msg"><i class="fa fa-clipboard-user"></i><p>Select a class to manage</p></div></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  ALERTS              ║
+           ╚══════════════════════╝ -->
+      <div id="pg-alerts" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>Smart Alert System</h2><p>Threshold-based auto notifications</p></div>
+          <div class="ph-right">
+            <button class="btn-primary" onclick="runAlerts()"><i class="fa fa-bolt"></i> Run Engine</button>
+          </div>
+        </div>
+        <!-- Rules -->
+        <div class="alert-rules-strip">
+          <div class="ars-card" style="--ac:#f6c90e">
+            <i class="fa fa-bell"></i><div class="ars-pct">&lt;75%</div><div>Student Notified</div>
+          </div>
+          <div class="ars-card" style="--ac:#f5a623">
+            <i class="fa fa-triangle-exclamation"></i><div class="ars-pct">&lt;70%</div><div>Class Incharge Alerted</div>
+          </div>
+          <div class="ars-card" style="--ac:#e05454">
+            <i class="fa fa-radiation"></i><div class="ars-pct">&lt;65%</div><div>Critical — HOD Alerted</div>
+          </div>
+          <div class="ars-card" style="--ac:#5fceaa">
+            <i class="fa fa-file-chart-column"></i><div class="ars-pct">Monthly</div><div>Auto Report to HOD</div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head">
+              <h4><i class="fa fa-stream"></i> Alert Feed</h4>
+              <div class="ch-actions">
+                <button class="tab-b active" onclick="setAlertFilter('all',this)">All</button>
+                <button class="tab-b" onclick="setAlertFilter('student',this)">Student</button>
+                <button class="tab-b" onclick="setAlertFilter('incharge',this)">Incharge</button>
+                <button class="tab-b" onclick="setAlertFilter('critical',this)">Critical</button>
+              </div>
+            </div>
+            <div id="alertFeedEl" style="max-height:400px;overflow-y:auto"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h4><i class="fa fa-radiation"></i> Critical Students (&lt;65%)</h4>
+              <span class="crit-count-badge" id="critCountBadge">0</span>
+            </div>
+            <div id="critStudentList" style="max-height:400px;overflow-y:auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  FACULTY DASHBOARD   ║
+           ║  (when logged as fac)║
+           ╚══════════════════════╝ -->
+      <div id="pg-fac-dashboard" class="page dn">
+        <div id="facDashContent"><!-- filled dynamically --></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  MY TIMETABLE (Fac)  ║
+           ╚══════════════════════╝ -->
+      <div id="pg-my-timetable" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>My Timetable</h2><p>Your weekly teaching schedule</p></div>
+        </div>
+        <div id="myTTContent"><!-- filled dynamically --></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  MY ATTENDANCE (Fac) ║
+           ╚══════════════════════╝ -->
+      <div id="pg-my-attendance" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>My Attendance Record</h2><p>Your attendance managed by Admin/HOD</p></div>
+        </div>
+        <div id="myAttContent"><!-- filled dynamically --></div>
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  MY CLASSES (Fac)    ║
+           ╚══════════════════════╝ -->
+      <div id="pg-my-classes" class="page dn">
+        <div class="page-header">
+          <div class="ph-left"><h2>My Classes</h2><p>Student attendance in your subject sessions</p></div>
+          <div class="ph-right">
+            <select class="sel" id="myClassSel" onchange="renderMyClass()">
+              <option value="">Select Class</option>
+            </select>
+          </div>
+        </div>
+        <div id="myClassContent"><div class="empty-msg"><i class="fa fa-users-class"></i><p>Select a class to view</p></div></div>
+      </div>
+
+
+      <!-- ╔══════════════════════╗
+           ║  PAGE: STUDENTS      ║
+           ╚══════════════════════╝ -->
+      <div id="pg-students" class="page dn">
+        <!-- content built dynamically by renderStudentsPage() -->
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  PAGE: REPORTS       ║
+           ╚══════════════════════╝ -->
+      <div id="pg-reports" class="page dn">
+        <!-- content built dynamically by renderReportsPage() -->
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  PAGE: SETTINGS      ║
+           ╚══════════════════════╝ -->
+      <div id="pg-settings" class="page dn">
+        <!-- content built dynamically by renderSettingsPage() -->
+      </div>
+
+      <!-- ╔══════════════════════╗
+           ║  PAGE: TRAIN MODELS  ║
+           ╚══════════════════════╝ -->
+      <div id="pg-train" class="page dn">
+        <!-- content built dynamically by renderTrainPage() -->
+      </div>
+
+    </div><!-- /page-area -->
+  </div><!-- /app-main -->
+</div><!-- /app-shell -->
+
+<!-- ═══════════════════ MODALS ═══════════════════ -->
+
+<!-- Override Modal -->
+<div id="overrideModal" class="modal-bg dn">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="ovModalTitle"><i class="fa fa-pen-to-square"></i> Attendance Override</h3>
+      <button onclick="closeModal('overrideModal')"><i class="fa fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="fg-2">
+        <div class="fg"><label>Staff / Modifier ID *</label>
+          <input id="ov_staffId" placeholder="e.g. FAC001 or ADMIN-01"/></div>
+        <div class="fg"><label>Override Type *</label>
+          <select id="ov_type" onchange="onOvTypeChange()">
+            <option value="staff">Staff Override</option>
+            <option value="classincharge">Class Incharge Override</option>
+            <option value="admin">Admin/HOD Override</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg-3">
+        <div class="fg"><label>Department *</label>
+          <select id="ov_dept" onchange="ovLoadCourses()">
+            <option value="">Select</option>
+          </select>
+        </div>
+        <div class="fg"><label>Course *</label>
+          <select id="ov_course" onchange="ovLoadStudents()"><option value="">Select</option></select>
+        </div>
+        <div class="fg"><label>Section *</label>
+          <select id="ov_section" onchange="ovLoadStudents()">
+            <option value="">Select</option><option value="A">A</option><option value="B">B</option>
+          </select>
+        </div>
+      </div>
+      <!-- Staff fields -->
+      <div id="ovStaffFields">
+        <div class="fg-2">
+          <div class="fg"><label>Period Slot * <span class="hint">(Staff: your period only)</span></label>
+            <select id="ov_period">
+              <option value="">Select period</option>
+              <option value="P1 08:30-09:20">P1 — 08:30 to 09:20</option>
+              <option value="P2 09:20-10:10">P2 — 09:20 to 10:10</option>
+              <option value="P3 10:30-11:20">P3 — 10:30 to 11:20</option>
+              <option value="P4 11:20-12:10">P4 — 11:20 to 12:10</option>
+              <option value="P5 13:00-13:50">P5 — 13:00 to 13:50</option>
+              <option value="P6 13:50-14:40">P6 — 13:50 to 14:40</option>
+              <option value="P7 14:40-15:30">P7 — 14:40 to 15:30</option>
+            </select>
+          </div>
+          <div class="fg"><label>Subject *</label>
+            <input id="ov_subject" placeholder="e.g. Data Structures"/></div>
+        </div>
+      </div>
+      <div class="fg"><label>Student *</label>
+        <select id="ov_student"><option value="">Select dept/course/section first</option></select>
+      </div>
+      <div class="fg-2">
+        <div class="fg"><label>From Status</label>
+          <select id="ov_from">
+            <option value="absent">Absent</option><option value="present">Present</option><option value="late">Late</option>
+          </select>
+        </div>
+        <div class="fg"><label>To Status *</label>
+          <select id="ov_to">
+            <option value="present">Present</option><option value="absent">Absent</option>
+            <option value="late">Late</option><option value="od">OD</option><option value="medical">Medical</option>
+          </select>
+        </div>
+      </div>
+      <!-- CI Reason Category -->
+      <div class="fg" id="ovCatField">
+        <label>Reason Category <span class="hint">(Class Incharge)</span></label>
+        <select id="ov_cat">
+          <option value="od_hackathon">OD — Hackathon</option>
+          <option value="od_sports">OD — Sports Event</option>
+          <option value="od_symposium">OD — Symposium / Conference</option>
+          <option value="od_placement">OD — Placement Drive</option>
+          <option value="od_nss">OD — NSS / NCC Activity</option>
+          <option value="medical">Medical Leave (with certificate)</option>
+          <option value="family_emergency">Family Emergency</option>
+          <option value="late_entry">Late Entry (after permission)</option>
+          <option value="other">Other (explain in reason)</option>
+        </select>
+      </div>
+      <div class="fg"><label>Reason * <span class="hint">(mandatory — will be recorded in audit)</span></label>
+        <textarea id="ov_reason" rows="3" placeholder="Describe why you are modifying this record..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('overrideModal')">Cancel</button>
+      <button class="btn-primary" onclick="submitOverride()"><i class="fa fa-save"></i> Save Override</button>
+    </div>
+  </div>
+</div>
+
+<!-- Faculty Attendance Modal -->
+<div id="facAttModal" class="modal-bg dn">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3><i class="fa fa-user-clock"></i> Mark Faculty Attendance</h3>
+      <button onclick="closeModal('facAttModal')"><i class="fa fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="fg-2">
+        <div class="fg"><label>Faculty *</label>
+          <select id="fam_faculty"><option value="">Select faculty</option></select>
+        </div>
+        <div class="fg"><label>Date *</label><input type="date" id="fam_date"/></div>
+      </div>
+      <div class="fg-2">
+        <div class="fg"><label>Status *</label>
+          <select id="fam_status">
+            <option value="present">Present</option><option value="absent">Absent</option>
+            <option value="late">Late Arrival</option><option value="halfday">Half Day</option>
+            <option value="od">On Duty</option><option value="leave">Leave</option>
+          </select>
+        </div>
+        <div class="fg"><label>Arrival Time</label><input type="time" id="fam_time" value="09:00"/></div>
+      </div>
+      <div class="fg"><label>Reason <span class="hint">(required for absent/late/halfday)</span></label>
+        <textarea id="fam_reason" rows="2" placeholder="Enter reason..."></textarea>
+      </div>
+      <div class="fg"><label>Updated By (Admin/HOD ID) *</label>
+        <input id="fam_updater" placeholder="e.g. HOD-SOC or ADMIN-001"/></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('facAttModal')">Cancel</button>
+      <button class="btn-primary" onclick="saveFacultyAttendance()"><i class="fa fa-save"></i> Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Generic Info Modal -->
+<div id="infoModal" class="modal-bg dn">
+  <div class="modal-box">
+    <div class="modal-header"><h3 id="infoModalTitle">Details</h3>
+      <button onclick="closeModal('infoModal')"><i class="fa fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="infoModalBody"></div>
+    <div class="modal-footer"><button class="btn-primary" onclick="closeModal('infoModal')">Close</button></div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div id="toastContainer"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

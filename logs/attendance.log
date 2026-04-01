@@ -1,0 +1,98 @@
+2026-03-29 17:46:17,775 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 17:46:17,778 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 17:46:25,888 [INFO] database_postgres: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:08:18,056 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:08:18,058 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:08:20,084 [INFO] database_postgres: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:10:27,017 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:10:27,020 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:10:29,561 [INFO] database_postgres: SQLite DB ready at /home/lenovo/Desktop/final-project-ready.tar/smart_attendance/attendance.db
+2026-03-29 18:11:24,741 [INFO] attendance_session: [SESSION-WORKER] Starting period=Period_1
+2026-03-29 18:11:24,741 [INFO] attendance_session: [SESSION] Thread started for period=Period_1
+2026-03-29 18:11:24,743 [ERROR] attendance_session: [SESSION-WORKER] cv2 not available
+2026-03-30 19:05:06,298 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-30 19:05:06,301 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-30 19:35:32,239 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-30 19:35:32,261 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-30 19:36:02,585 [INFO] enroll: Camera opened backend=0 640x480
+2026-03-30 19:39:24,144 [WARNING] liveness: MediaPipe not available: module 'mediapipe' has no attribute 'solutions' — skeleton disabled.
+2026-03-30 19:39:30,164 [INFO] database_postgres: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-30 19:39:31,102 [WARNING] twin_analysis: Twin model not found — train with [2] in main menu.
+2026-03-30 19:39:38,230 [INFO] attendance_session: Camera opened: backend=0 640x480
+2026-03-30 19:40:31,101 [INFO] attendance_session: Session ended: Manual_1939
+2026-03-30 19:41:52,761 [INFO] attendance_session: [SESSION-WORKER] Starting period=Period_1
+2026-03-30 19:41:52,762 [INFO] attendance_session: [SESSION] Thread started for period=Period_1
+2026-03-30 19:41:52,762 [WARNING] twin_analysis: Twin model not found — train with [2] in main menu.
+2026-03-30 19:42:00,678 [INFO] attendance_session: Camera opened: backend=0 640x480
+2026-03-30 19:42:00,679 [INFO] attendance_session: [SESSION-WORKER] Camera open, streaming period=Period_1
+2026-03-30 19:42:39,489 [INFO] attendance_session: [SESSION-WORKER] Thread exited for period=Period_1
+2026-03-30 19:42:39,657 [INFO] attendance_session: [SESSION] Stopped.
+2026-03-30 19:44:19,404 [INFO] attendance_session: [SESSION-WORKER] Starting period=Period_1
+2026-03-30 19:44:19,404 [INFO] attendance_session: [SESSION] Thread started for period=Period_1
+2026-03-30 19:44:19,406 [WARNING] twin_analysis: Twin model not found — train with [2] in main menu.
+2026-03-30 19:44:27,393 [INFO] attendance_session: Camera opened: backend=0 640x480
+2026-03-30 19:44:27,394 [INFO] attendance_session: [SESSION-WORKER] Camera open, streaming period=Period_1
+2026-03-30 19:47:21,655 [INFO] attendance_session: [SESSION-WORKER] Thread exited for period=Period_1
+2026-03-30 19:47:21,790 [INFO] attendance_session: [SESSION] Stopped.
+2026-03-31 08:14:21,516 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-31 08:14:21,564 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-31 08:14:39,393 [INFO] database_postgres: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-31 08:14:41,078 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-03-31 08:14:41,078 [INFO] api: Feature routes registered (departments + faculty).
+2026-03-31 08:48:40,402 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-31 08:48:40,425 [INFO] database: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-31 08:48:44,952 [INFO] database_postgres: SQLite DB ready at /home/lenovo/Desktop/final_project_ready/smart_attendance/attendance.db
+2026-03-31 08:48:45,150 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-03-31 08:48:45,150 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 11:14:13,807 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:14:13,813 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:14:22,651 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:15:40,509 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:15:40,514 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:16:07,047 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:21:24,921 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:21:24,925 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:22:30,854 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:22:30,857 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:25:51,074 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:25:51,078 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:25:55,053 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:25:55,159 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 11:25:55,159 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 11:50:36,054 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:50:36,056 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:50:39,503 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:50:39,596 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 11:50:39,597 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 11:51:49,735 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 11:51:49,736 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 11:54:33,778 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:54:33,780 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:54:36,632 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 11:54:36,693 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 11:54:36,693 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 12:10:14,736 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 12:10:14,738 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 12:10:22,183 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 12:10:22,247 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 12:10:22,247 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 13:05:50,069 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 13:05:50,071 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 13:05:53,788 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 13:05:53,956 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 13:05:53,956 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 13:25:50,185 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 13:25:50,187 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 13:25:52,064 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 13:25:52,127 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 13:25:52,127 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 14:28:11,186 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 14:28:11,189 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 14:28:13,532 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 14:28:13,592 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 14:28:13,593 [INFO] api: Feature routes registered (departments + faculty).
+2026-04-01 15:31:22,132 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 15:31:22,134 [INFO] database: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 15:31:25,007 [INFO] database_postgres: SQLite DB ready at C:\Users\sinth\Downloads\smart_attendance1\smart_attendance\attendance.db
+2026-04-01 15:31:25,089 [INFO] api_features: Feature routes (departments + faculty) registered.
+2026-04-01 15:31:25,089 [INFO] api: Feature routes registered (departments + faculty).

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EduDrill Pro — Engineering Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══ NOISE OVERLAY ══ -->
+<div class="noise-overlay"></div>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header" id="siteHeader">
+  <div class="hdr-inner">
+    <div class="hdr-brand">
+      <div class="brand-cube">
+        <span>E</span>
+      </div>
+      <div class="brand-text">
+        <span class="bt-main">EduDrill</span>
+        <span class="bt-pro">PRO</span>
+      </div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" id="breadcrumb">
+      <span class="bc-home" onclick="goHome()">
+        <i class="fa fa-house-chimney"></i> Home
+      </span>
+    </nav>
+
+    <!-- Top KPIs (compact) -->
+    <div class="hdr-kpis" id="hdrKpis"></div>
+  </div>
+</header>
+
+<!-- ══ MAIN CONTENT ══ -->
+<main class="main-wrap" id="mainWrap">
+
+  <!-- ══════════════════════════════════════════════
+       LEVEL 0 — LANDING / HOME
+  ══════════════════════════════════════════════ -->
+  <section id="pg-home" class="page active">
+
+    <!-- Hero -->
+    <div class="hero-block">
+      <div class="hero-tag">Engineering College Analytics</div>
+      <h1 class="hero-title">Drill Into <em>Every</em><br/>Layer of Your Institute</h1>
+      <p class="hero-sub">Category → School → Department → Section → Students & Faculty</p>
+      <div class="hero-kpi-row" id="heroKpis">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- Category cards -->
+    <div class="section-label">
+      <span>Select a Category to Begin</span>
+      <div class="sl-line"></div>
+    </div>
+
+    <div class="cat-grid" id="catGrid">
+      <!-- filled by JS -->
+    </div>
+
+    <!-- Overview charts -->
+    <div class="section-label" style="margin-top:48px">
+      <span>Institution Overview</span>
+      <div class="sl-line"></div>
+    </div>
+
+    <div class="chart-row" id="overviewCharts">
+      <div class="chart-card">
+        <div class="cc-head">
+          <span class="cc-title">Students vs Faculty</span>
+          <span class="cc-sub">All categories</span>
+        </div>
+        <div class="cc-body"><canvas id="overviewPie"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="cc-head">
+          <span class="cc-title">Departments by Category</span>
+          <span class="cc-sub">Distribution overview</span>
+        </div>
+        <div class="cc-body"><canvas id="overviewBar"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="cc-head">
+          <span class="cc-title">Student Distribution</span>
+          <span class="cc-sub">Across all schools</span>
+        </div>
+        <div class="cc-body"><canvas id="overviewDoughnut"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <div class="section-label" style="margin-top:48px">
+      <span>Category Summary Table</span>
+      <div class="sl-line"></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table" id="catSummaryTable">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Schools</th>
+            <th>Departments</th>
+            <th>Total Students</th>
+            <th>Total Faculty</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="catTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       LEVEL 1 — SCHOOL DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <section id="pg-school" class="page">
+    <div class="pg-header" id="schoolHeader"></div>
+    <div class="kpi-strip" id="schoolKpis"></div>
+    <div class="chart-row" id="schoolCharts"></div>
+    <div class="section-label" style="margin-top:36px">
+      <span>Department Breakdown</span>
+      <div class="sl-line"></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Department</th>
+            <th>HOD</th>
+            <th>Sections</th>
+            <th>Total Students</th>
+            <th>Male</th>
+            <th>Female</th>
+            <th>Faculty</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="schoolTableBody"></tbody>
+      </table>
+    </div>
+    <div class="dept-card-grid" id="schoolDeptCards"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       LEVEL 2 — DEPARTMENT DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <section id="pg-dept" class="page">
+    <div class="pg-header" id="deptHeader"></div>
+    <div class="kpi-strip" id="deptKpis"></div>
+    <div class="chart-row" id="deptCharts"></div>
+    <div class="section-label" style="margin-top:36px">
+      <span>Section Breakdown</span>
+      <div class="sl-line"></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Section</th>
+            <th>Total Students</th>
+            <th>Boys</th>
+            <th>Girls</th>
+            <th>Faculty</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="deptTableBody"></tbody>
+      </table>
+    </div>
+    <div class="sec-card-grid" id="deptSecCards"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       LEVEL 3 — SECTION DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <section id="pg-section" class="page">
+    <div class="pg-header" id="sectionHeader"></div>
+    <div class="kpi-strip" id="sectionKpis"></div>
+    <div class="chart-row" id="sectionCharts"></div>
+
+    <!-- Students -->
+    <div class="section-label" style="margin-top:36px">
+      <span>Student Roster</span>
+      <div class="sl-line"></div>
+    </div>
+    <div class="table-controls">
+      <div class="search-wrap">
+        <i class="fa fa-search"></i>
+        <input id="stuSearch" placeholder="Search students..." oninput="filterStudentTable()"/>
+      </div>
+      <div class="filter-pills" id="genderFilter">
+        <button class="fpill active" data-val="" onclick="setGenderFilter('',this)">All</button>
+        <button class="fpill" data-val="M" onclick="setGenderFilter('M',this)">Male</button>
+        <button class="fpill" data-val="F" onclick="setGenderFilter('F',this)">Female</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Year</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="stuTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Faculty -->
+    <div class="section-label" style="margin-top:40px">
+      <span>Faculty Roster</span>
+      <div class="sl-line"></div>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Faculty ID</th>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Subject</th>
+            <th>Experience</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="facTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ TOAST ══ -->
+<div id="toastBox"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
